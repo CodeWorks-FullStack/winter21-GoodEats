@@ -5,11 +5,12 @@
   <main>
     <router-view />
   </main>
-  <footer>
-    <div class="bg-dark text-light text-center p-4">
-      Made with 💖 by CodeWorks
-    </div>
-  </footer>
+  <Modal id="restaurant-modal">
+    <template #modal-title>{{ restaurant.name }}</template>
+    <template #modal-body>
+      <RestaurantModal />
+    </template>
+  </Modal>
 </template>
 
 <script>
@@ -19,12 +20,12 @@ export default {
   name: 'App',
   setup() {
     return {
-      appState: computed(() => AppState)
+      appState: computed(() => AppState),
+      restaurant: computed(() => AppState.activeRestaurant)
     }
   }
 }
 </script>
 <style lang="scss">
 @import "./assets/scss/main.scss";
-
 </style>

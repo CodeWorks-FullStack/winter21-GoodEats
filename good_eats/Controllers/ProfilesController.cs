@@ -12,11 +12,21 @@ namespace good_eats.Controllers
   public class ProfilesController : ControllerBase
   {
     private readonly ReviewsService _reviewsService;
+    private readonly AccountService _accountService;
 
-    public ProfilesController(ReviewsService reviewsService)
+    public ProfilesController(ReviewsService reviewsService, AccountService accountService)
     {
       _reviewsService = reviewsService;
+      _accountService = accountService;
     }
+
+    [HttpGet("{id}")]
+    public ActionResult<Profile> Get(string id)
+    {
+      Profile profile = _accountService.GetProfileById(id);
+      return Ok(profile);
+    }
+
 
     [HttpGet("{id}/reviews")]
     public async Task<ActionResult<List<Review>>> GetReviewsByProfileAsync(string id)
